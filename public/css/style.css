@@ -1,0 +1,262 @@
+/* NavBar */
+
+  
+.navLink {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between username and image */
+    color: black;
+    font-size: 25px;
+    font-weight: 1000;
+    margin: 5px 5px 5px 5px;
+    text-decoration: none;
+    padding: 10px 10px 10px 10px;
+    transition: 1s;
+}
+
+.navLink p {
+    margin: 0; /* Remove default paragraph margin */
+}
+.navLink img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.nav-item.dropdown .dropdown-menu {
+    display: none; /* Initially hidden */
+    opacity: 0;
+    transform: translateY(-10px); /* Start slightly above */
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block; /* Show dropdown */
+    opacity: 1;
+    transform: translateY(0); /* Reset position */
+    animation: fadeInSlide 0.5s; /* Apply animation */
+}
+
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-menu {
+    margin-top: 0; /* Align the dropdown properly */
+    z-index: 1050; /* Ensure it stays above other elements */
+    width: 97%;
+    margin-left: 5px;
+}
+
+.dropdown-item {
+    font-size: 18px;
+    font-weight: 500;
+    color: black;
+}
+
+.dropdown-item:hover {
+    background-color: aquamarine;
+    color: black;
+}
+
+
+.navLink.active{
+    color: green;
+}
+  
+  
+.navLink:hover{
+    background-color: aquamarine;
+    border-radius: 10px;
+}
+
+.seacrhArea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.searchBar{
+    width: 500px;
+    height: 50px;
+    padding: 0px 30px 0px 30px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+
+.top-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+.bottom-navbar {
+    position: sticky;
+    top: 56px; /* Adjust to match the height of the top navbar */
+    z-index: 1010;
+    transition: transform 0.3s ease-in-out;
+}
+.bottom-navbar.hidden {
+    transform: translateY(-100%);
+}
+
+/* Home page body */
+.big-container {
+    height: 400px; 
+    background-image: url('../images/tank2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 5px 5px 5px 5px;
+}
+  
+.small-container {
+    height: calc( 50% - 5px);
+    margin-bottom: 10px;
+    
+}
+
+#s1{
+    background-image: url('../images/equipment.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#s2{
+    background-image: url('../images/soil.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.boxHead {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: inline;
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+}
+
+
+.boxLink{
+    text-decoration: none;
+}
+
+.glo{
+    transition: 0.5s;
+}
+
+.glo:hover{
+    box-shadow: 0px 0px 5px 8px aquamarine;
+}
+
+.prod{
+    text-decoration: none;
+}
+
+.prod .card {
+    height: 100%; /* Stretch card to match container height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensures equal spacing for content */
+}
+
+.card-img-top {
+    height: 200px; /* Set a fixed height for images */
+    object-fit: cover; /* Ensures the image scales proportionally */
+}
+
+/* login stuff */
+.login-container {
+    margin-top: 50px;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-card {
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+
+.alertText{
+    font-size: 150%;
+    font-style: oblique;
+    font-weight: bolder;
+}
+
+/*some wallet stuff*/
+.payment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+.payment-box {
+    width: 50%;
+    min-width: 300px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.btn-cancel {
+    margin-top: 20px;
+}
+
+.line {
+    border: 1px solid black;
+    
+}
+
+.dashboard-container {
+    padding: 40px 0;
+}
+.order-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.card-header {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Constrain the carousel size */
+.carousel-container {
+    max-height: 500px; /* Fixed max height for the carousel */
+    overflow: hidden;
+  }
+  .carousel-container img {
+    object-fit: cover;
+    height: 100%;
+  }
+  
+  /* Constrain the description to align with the image carousel */
+  .description-container {
+    max-width: 960px; /* Matches two `col-md-6` widths */
+    margin: 0 auto; /* Center the description */
+  }
+  
+  /* Ensure buttons and text move below carousel when screen size is small */
+  @media (max-width: 768px) {
+    .row > .col-md-6 {
+      width: 100%; /* Make columns stack vertically */
+    }
+    .product-details {
+      margin-top: 20px; /* Add spacing between carousel and details */
+    }
+  }
+  
+
+
+
+

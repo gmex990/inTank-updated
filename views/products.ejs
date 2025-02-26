@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InTank Aquarium</title>
+    <link rel="icon" type="image/x-icon" href="/images/InTank.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+    <%- include ('partials/nav.ejs') %>
+
+    <div class="container mt-4">
+        
+
+      <div class="container mt-4">
+        <div class="row">
+            <% products.forEach((product, index) => { %>
+                <div class="col-md-4 mb-4 d-flex">
+                    <a href="/product/<%= product.prodId %>" class="prod w-100">
+                        <div class="card h-100">
+                            <img src="/images/<%= product.imgName %>" class="card-img-top" alt="<%= product.prodName %>">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= product.prodName %></h5>
+                                <p class="text-success"><strong>$<%= product.price %></strong></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
+</body>
+</html>

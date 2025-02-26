@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= product.prodName %></title>
+  <link rel="icon" type="image/x-icon" href="/images/InTank.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link href="/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <%- include('partials/nav.ejs') %>
+  
+
+  <!-- Product Layout -->
+  <div class="container mt-5">
+    <a href="/" class="btn btn-secondary mb-3">Back to Home</a>
+    <div class="row">
+      <!-- Left Column: Image Carousel -->
+      <div class="col-md-6 ">
+        <div id="productCarousel" class="carousel slide " data-bs-ride="carousel">
+          <div class="carousel-inner ">
+            <% images.forEach((image, index) => { %>
+              <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                <img src="/images/<%= image.imgName %>" class="d-block w-100" alt="Product Image">
+              </div>
+            <% }); %>
+          </div>
+          <button class="carousel-control-prev bg-dark" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next bg-dark" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Column: Name, Price, and Buttons -->
+      <div class="col-md-6 product-details">
+        <h1 class="mb-3"><%= product.prodName %></h1>
+        <h3 class="text-success mb-4">$<%= product.price %></h3>
+        <p class="text-muted">Stocks available: <%= product.stock %></p>
+        <div>
+          <form action="/cart/add" method="POST">
+            <input type="hidden" name="prodId" value="<%= product.prodId %>">
+            <label for="quantity" class="me-2">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" class="form-control w-25 d-inline" value="1" min="1" max="<%= product.stock %>">
+            <button type="submit" class="btn btn-primary ms-3">Add to Cart</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="row mt-4">
+      <div class="col-12 description-container">
+        <div class="product-description">
+          <h4>Product Description</h4>
+          <p><%= product.prodDesc %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>

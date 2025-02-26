@@ -1,0 +1,81 @@
+<nav class="sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white top-navbar">
+      <div class="container">
+        <a href="/">
+          <img src="/images/inTank.png" alt="Logo" height="100px">
+        </a>
+        <form action="/search" method="post" class="searchArea">
+          <% var prevS; %>
+          <input class="searchBar" type="text" name="query" id="query" placeholder="What are you looking for?" value="<% if (prevS !== undefined) { %><%= prevS %><% } else { %><% } %>">
+        </form>
+        <div class="d-flex">
+          <% if (user) { %>
+            <% if (user.role == 0) { %>
+              <a href="/cart" class="btn btn-link text-dark navLink">&#128722;</a>
+            <% } %>
+            <div class="nav-item dropdown">
+              <a href="#" class="navLink dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <p class="mb-0">Hello <%= user.username %>!</p>
+                <% if (user.pImg != null) { %>
+                  <img src="/images/<%= user.pImg %>" alt="Profile Picture">
+                <% } else { %>
+                  <img src="/images/default.png" alt="Profile Picture">
+                <% } %>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                <% if (user.role == '1') { %>
+                  
+                <% }else{ %>
+                  <li><a class="dropdown-item" href="/orders">Orders</a></li>
+                <% } %>
+
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+              </ul>
+            </div>
+            
+            
+          <% } else { %>
+              <a href="/login" class="navLink"><p>Login</p></a>
+          <% } %>
+          
+        </div>
+
+      </div>
+    </nav>
+    <div class="navbar navbar-expand-lg navbar-light border-bottom border-success border-3 bg-white bottom-navbar">
+      <div class="container">
+        <% if (!user || user.role == 0) { %>
+          <a href="/" class="navLink <% if(page == "index"){ %> <%= 'active' %> <% } %> ">Home</a>
+          <a href="/tanks" class="navLink <% if(page == "tank"){ %> <%= 'active' %> <% } %>">Tank</a>
+          <a href="/scapes" class="navLink <% if(page == "scape"){ %> <%= 'active' %> <% } %> ">Scapes</a>
+          <a href="/equipments" class="navLink <% if(page == "equipment"){ %> <%= 'active' %> <% } %>">Equipments</a>
+          <a href="/foods" class="navLink <% if(page == "food"){ %> <%= 'active' %> <% } %>">Foods</a>
+        <% } else if (user.role == 1) { %>
+          <div class="nav-item dropdown">
+            <a href="/adminIndex" class="navLink dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <p class="navlink">Product</p>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+              <li><a href="/adminIndex" class="dropdown-item <% if(page == "index"){ %> <%= 'active' %> <% } %>">All</a></li>
+              <li><a href="/adminTanks" class="dropdown-item <% if(page == "tank"){ %> <%= 'active' %> <% } %>">Tank</a></li>
+              <li><a href="/adminScapes" class="dropdown-item <% if(page == "scape"){ %> <%= 'active' %> <% } %>">Scapes</a></li>
+              <li><a href="/adminEquipments" class="dropdown-item <% if(page == "equipment"){ %> <%= 'active' %> <% } %>">Equipments</a></li>
+              <li><a href="/adminFoods" class="dropdown-item <% if(page == "food"){ %> <%= 'active' %> <% } %>">Foods</a></li>
+            </ul>
+          </div>
+          <a class="navLink <% if(page == "addProd"){ %> <%= 'active' %> <% } %>" href="/addProduct">Add Product</a>
+          <a class="navLink <% if(page == "dashboard"){ %> <%= 'active' %> <% } %>" href="/adminDashboard">Dashboard</a>
+          <a class="navLink <% if(page == "reports"){ %> <%= 'active' %> <% } %>" href="/reports/quantity">Reports</a>
+        <% } %>
+      </div>
+    </div>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/js/nav.js"></script>
+    
+

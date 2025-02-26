@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InTank Aquarium</title>
+    <link rel="icon" type="image/x-icon" href="/images/InTank.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <%- include ('partials/nav.ejs') %>
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Cart Items Section -->
+            <div class="col-md-8 mb-5">
+                <h1 class="mb-4">Your Cart</h1>
+    
+                <% if (cartItems.length > 0) { %>
+                    <% cartItems.forEach(product => { %>
+                        <div class="card mb-3">
+                            <div class="row g-0 align-items-center">
+                                <!-- Product Information -->
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= product.prodName %></h5>
+                                        <p class="text-muted">$<%= product.price %></p>
+                                        <p class="text-muted">Stocks available: <%= product.stock %></p>
+                                        <div class="mb-3">
+                                            <form action="/cart/update" method="POST" class="d-inline">
+                                                <label for="quantity" class="me-2">Quantity:</label>
+                                                <input type="number" id="qty" name="qty" class="form-control w-25 d-inline" value="<%= product.qty %>" min="1" max="<%= product.stock %>" required>
+                                                <input type="hidden" name="prodId" value="<%= product.prodId %>">
+                                                <button type="submit" class="btn btn-success btn-sm">Update</button>
+                                            </form>
+                                            <form action="/cart/deleteItem" method="POST" class="d-inline">
+                                                <input type="hidden" name="prodId" value="<%= product.prodId %>">
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Product Image -->
+                                <div class="col-md-4 text-end">
+                                    <img src="/images/<%= product.imgName %>" alt="Product Image" class="img-fluid rounded" style="width: 200px; height: 200px; object-fit: cover;">
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <div class="alert alert-info">Your cart is empty. <a href="/" class="alert-link">Start shopping now!</a></div>
+                <% } %>
+            </div>
+            <% if (cartItems.length > 0) { %>
+                
+                <div class="col-md-4">
+                    <h1 class="mb-4 text-center">Payment Methods</h1>
+                    <div class="row m-3 border-bottom fw-bold">
+                        <div id="paypal-button-container"></div>
+                        <input type="hidden" id="cartProducts" value='<%-JSON.stringify(cartItems)%>'>
+                        <p id="result-message"></p>
+                        <script src="https://sandbox.paypal.com/sdk/js?client-id=AZVqKGVbLpy3ybkVdA4l2jsxrHk1UEs2utix7qZ1Zi7UHpJXFciLO8Lb_ckqsL4DUCbPys4MzFoxEnOF&components=buttons&currency=SGD">
+                        </script>
+                        <script src="/js/paypal.js"> </script>
+                    </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+    
+
+</body>
+</html>
+
